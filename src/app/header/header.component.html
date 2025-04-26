@@ -1,0 +1,18 @@
+<header class="dashboard-header mat-elevation-z2">
+  <mat-form-field style="margin: 0 auto;" appearance="outline" class="search-field">
+    <mat-label>Hae avainsanoja...</mat-label>
+    <input matInput />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="user-menu" (click)="toggleDropdown()">
+    <mat-icon>account_circle</mat-icon>
+    <div *ngIf="showDropdown" class="user-dropdown mat-elevation-z4">
+      <p><strong>Kerola Tuomas Veikko</strong></p>
+      <small>Erikoissairaanhoito<br />Paljatha. esh. P0007</small>
+      <button mat-button>Asetukset</button>
+      <button mat-button>Ylläpitäjän paneeli</button>
+      <button mat-button color="warn">Kirjaudu ulos</button>
+    </div>
+  </div>
+</header>

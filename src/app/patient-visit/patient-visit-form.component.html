@@ -1,0 +1,57 @@
+<div class="header">
+  <div class="header-content">
+    <div class="search-container">
+      <input type="text" placeholder="Search..." />
+    </div>
+  </div>
+</div>
+
+<div class="form-container" [formGroup]="visitForm">
+  <form (ngSubmit)="onSubmit()">
+
+    <label for="patientName">Potilaan koko nimi:</label>
+    <input id="patientName" type="text" formControlName="patientName" required />
+    <div class="error" *ngIf="visitForm.get('patientName')?.invalid && visitForm.get('patientName')?.touched">
+      Name is required
+    </div>
+
+    <label for="visitDate">Vastaanottopäivä:</label>
+    <input id="visitDate" type="date" formControlName="visitDate" required />
+    <div class="error" *ngIf="visitForm.get('visitDate')?.invalid && visitForm.get('visitDate')?.touched">
+      Date is required
+    </div>
+
+    <label for="visitTime">Vastaanottoaika:</label>
+    <input id="visitTime" type="time" formControlName="visitTime" required />
+    <div class="error" *ngIf="visitForm.get('visitTime')?.invalid && visitForm.get('visitTime')?.touched">
+      Time is required
+    </div>
+
+    <label for="doctor">Lääkäri:</label>
+    <select id="doctor" formControlName="doctor" required>
+      <option value="" disabled selected>Select doctor</option>
+      <option *ngFor="let doc of doctors" [value]="doc">{{ doc }}</option>
+    </select>
+    <div class="error" *ngIf="visitForm.get('doctor')?.invalid && visitForm.get('doctor')?.touched">
+      Doctor is required
+    </div>
+
+    <label for="visitType">Tapahtuman tyyppi:</label>
+    <select id="visitType" formControlName="visitType" required>
+      <option value="" disabled selected>Select visit type</option>
+      <option *ngFor="let type of visitTypes" [value]="type">{{ type }}</option>
+    </select>
+    <div class="error" *ngIf="visitForm.get('visitType')?.invalid && visitForm.get('visitType')?.touched">
+      Visit type is required
+    </div>
+
+    <label for="notes">Käynnin syyt:</label>
+    <textarea id="notes" formControlName="notes" placeholder="Käynnin syyt..." rows="4"></textarea>
+
+    <div class="form-buttons">
+      <button type="submit" [disabled]="!visitForm.valid" class="btn-primary">Luo tapahtuma</button>
+      <button type="button" class="btn-secondary">Sulje</button>
+    </div>
+
+  </form>
+</div>

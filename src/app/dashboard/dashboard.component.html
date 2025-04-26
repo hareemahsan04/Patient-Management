@@ -1,0 +1,60 @@
+<app-header></app-header>
+
+<!-- Action buttons row -->
+<section class="main-actions">
+  <div class="action-button" *ngFor="let action of actions">
+    <mat-icon>{{ action.icon }}</mat-icon>
+    <span>{{ action.name }}</span>
+  </div>
+</section>
+
+<main class="dashboard-content">
+  <!-- Worklist Section -->
+  <section class="worklist">
+    <div class="worklist-header">
+      <h2>Työlista</h2>
+      <button mat-stroked-button>Kalenteri</button>
+    </div>
+
+    <div class="work-item" *ngFor="let appointment of appointments">
+      <p class="time-info">
+        {{ appointment.time }} – {{ appointment.name }} | {{ appointment.type }}
+      </p>
+      <div class="actions">
+        <button mat-flat-button color="primary">Avaa etävastaanotto</button>
+        <button mat-stroked-button>Avaa potilas</button>
+        <button mat-stroked-button>Viestit</button>
+      </div>
+      <p *ngIf="appointment.message" class="message">
+        {{ appointment.message }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Side Panel -->
+  <aside class="side-panel">
+    <!-- Shortcuts -->
+    <section class="shortcuts">
+      <div class="shortcut" *ngFor="let shortcut of shortcuts">
+        <mat-icon>{{ shortcut.icon }}</mat-icon>
+        <span>{{ shortcut.name }}</span>
+      </div>
+    </section>
+  
+    <!-- Recent Patients -->
+    <section class="recent-patients">
+      <h3>Viimeisimmät potilaat</h3>
+      <mat-form-field appearance="outline" class="search-patient">
+        <mat-label>Etsi potilaan nimi tai henkilötunnus...</mat-label>
+        <input matInput />
+      </mat-form-field>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let patient of recentPatients">
+          {{ patient.name }} – {{ patient.id }}
+        </mat-list-item>
+      </mat-nav-list>
+    </section>
+  </aside>
+
+  
+</main>
