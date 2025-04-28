@@ -3,58 +3,110 @@
 <!-- Action buttons row -->
 <section class="main-actions">
   <div class="action-button" *ngFor="let action of actions">
-    <mat-icon>{{ action.icon }}</mat-icon>
-    <span>{{ action.name }}</span>
+    <div class="action-icon-container">
+      <mat-icon>{{ action.icon }}</mat-icon>
+    </div>
+    <span class="action-name">{{ action.name }}</span>
   </div>
 </section>
 
 <main class="dashboard-content">
   <!-- Worklist Section -->
-  <section class="worklist">
+  <section class="worklist card-container">
     <div class="worklist-header">
-      <h2>Työlista</h2>
-      <button mat-stroked-button>Kalenteri</button>
+      <div class="header-with-button">
+        <h2>Työlista</h2>
+        <button mat-stroked-button class="calendar-button">
+          <mat-icon>calendar_today</mat-icon>
+          Kalenteri
+        </button>
+      </div>
+    </div>
+    
+    <div class="list-navigation" style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+      <button mat-button class="nav-button" style="color: gray;">
+        <mat-icon>chevron_left</mat-icon>
+        Eilinen lista
+      </button>
+      <button mat-button class="nav-button" style="color: gray;">
+        Huomisen lista
+        <mat-icon>chevron_right</mat-icon>
+      </button>
     </div>
 
     <div class="work-item" *ngFor="let appointment of appointments">
-      <p class="time-info">
-        {{ appointment.time }} – {{ appointment.name }} | {{ appointment.type }}
-      </p>
-      <div class="actions">
-        <button mat-flat-button color="primary">Avaa etävastaanotto</button>
-        <button mat-stroked-button>Avaa potilas</button>
-        <button mat-stroked-button>Viestit</button>
+      <div class="work-item-content">
+        <p class="time-info">
+          <mat-icon>add</mat-icon> {{ appointment.time }} – {{ appointment.name }} | {{ appointment.type }}
+        </p>
+        <div class="actions">
+          <button mat-flat-button color="primary">Avaa etävastaanotto</button>
+          <button mat-stroked-button>Avaa potilas</button>
+          <button mat-stroked-button>Viestit</button>
+        </div>
       </div>
       <p *ngIf="appointment.message" class="message">
         {{ appointment.message }}
       </p>
     </div>
+
+    <div class="work-item">
+      <div class="work-item-content">
+        <span class="work-item-text">
+          Muistiinpanot
+        </span>
+        <div class="notes-options">
+          <button class="note-option-button">
+            <mat-icon>file_download</mat-icon>
+          </button>
+          <button class="note-option-button">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="notes-container">
+        <div class="notes-actions">
+          <button class="add-note-button">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </section>
 
-  <!-- Side Panel -->
+  <!-- Side Panel - Fixed the structure by removing the extra div.flex wrapper -->
   <aside class="side-panel">
     <!-- Shortcuts -->
-    <section class="shortcuts">
-      <div class="shortcut" *ngFor="let shortcut of shortcuts">
-        <mat-icon>{{ shortcut.icon }}</mat-icon>
-        <span>{{ shortcut.name }}</span>
-      </div>
-    </section>
+    <div class="shortcuts-container">
+      <section class="shortcuts">
+        <div class="shortcut" *ngFor="let shortcut of shortcuts">
+          <div class="shortcut-icon-container">
+            <mat-icon>{{ shortcut.icon }}</mat-icon>
+          </div>
+          <span class="shortcut-name">{{ shortcut.name }}</span>
+        </div>
+        <div class="shortcut add-shortcut">
+          <div class="shortcut-icon-container add-icon">
+            <mat-icon>add</mat-icon>
+          </div>
+        </div>
+      </section>
+    </div>
   
     <!-- Recent Patients -->
     <section class="recent-patients">
       <h3>Viimeisimmät potilaat</h3>
-      <mat-form-field appearance="outline" class="search-patient">
-        <mat-label>Etsi potilaan nimi tai henkilötunnus...</mat-label>
-        <input matInput />
-      </mat-form-field>
-      <mat-nav-list>
-        <mat-list-item *ngFor="let patient of recentPatients">
-          {{ patient.name }} – {{ patient.id }}
-        </mat-list-item>
-      </mat-nav-list>
+      <div class="search-container">
+        <input type="text" placeholder="Etsi potilaan nimi tai henkilötunnus..." class="patient-search">
+        <mat-icon class="search-icon">search</mat-icon>
+      </div>
+      <div class="patient-list">
+        <div class="patient-item" *ngFor="let patient of recentPatients">
+          <mat-icon class="chevron-icon">chevron_right</mat-icon>
+          <span>{{ patient.name }} – {{ patient.id }}</span>
+        </div>
+      </div>
     </section>
   </aside>
-
-  
 </main>

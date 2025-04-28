@@ -1,57 +1,78 @@
-<div class="header">
-  <div class="header-content">
-    <div class="search-container">
-      <input type="text" placeholder="Search..." />
+<app-header></app-header>
+
+<div class="visit-form-wrapper">
+  <div class="visit-form-header">
+    <div>
+      <p>Tuomas Veikko Kerola, Helsingin Sairaala, Kardiologian osasto</p>
+    </div>
+    <div class="date-time">
+      <span>{{ currentDateTime | date: 'dd/MM/yyyy HH:mm' }}</span>
+      <button type="button" class="edit-btn" (click)="editDateTime()"></button>
     </div>
   </div>
-</div>
 
-<div class="form-container" [formGroup]="visitForm">
-  <form (ngSubmit)="onSubmit()">
-
-    <label for="patientName">Potilaan koko nimi:</label>
-    <input id="patientName" type="text" formControlName="patientName" required />
-    <div class="error" *ngIf="visitForm.get('patientName')?.invalid && visitForm.get('patientName')?.touched">
-      Name is required
+  <form [formGroup]="visitForm" (ngSubmit)="onSubmit()" class="visit-form-body">
+    <div class="form-row">
+      <label for="patientName">Potilaan koko nimi:</label>
+      <input id="patientName" type="text" formControlName="patientName" />
     </div>
 
-    <label for="visitDate">Vastaanottopäivä:</label>
-    <input id="visitDate" type="date" formControlName="visitDate" required />
-    <div class="error" *ngIf="visitForm.get('visitDate')?.invalid && visitForm.get('visitDate')?.touched">
-      Date is required
+    <div class="form-row two-columns">
+      <div>
+        <label for="birthDate">Syntymäaika:</label>
+        <input id="birthDate" type="date" formControlName="birthDate" />
+      </div>
+      <div>
+        <label for="patientId">Potilastunnus:</label>
+        <input id="patientId" type="text" formControlName="patientId" />
+      </div>
     </div>
 
-    <label for="visitTime">Vastaanottoaika:</label>
-    <input id="visitTime" type="time" formControlName="visitTime" required />
-    <div class="error" *ngIf="visitForm.get('visitTime')?.invalid && visitForm.get('visitTime')?.touched">
-      Time is required
+    <div class="form-row">
+      <label for="visitType">Tapahtuman tyyppi:</label>
+      <input id="visitType" type="text" formControlName="visitType" placeholder="Tapahtuman tyyppi..." />
     </div>
 
-    <label for="doctor">Lääkäri:</label>
-    <select id="doctor" formControlName="doctor" required>
-      <option value="" disabled selected>Select doctor</option>
-      <option *ngFor="let doc of doctors" [value]="doc">{{ doc }}</option>
-    </select>
-    <div class="error" *ngIf="visitForm.get('doctor')?.invalid && visitForm.get('doctor')?.touched">
-      Doctor is required
+    <div class="form-row">
+      <label for="visitReason">Käynnin syyt:</label>
+      <input id="visitReason" type="text" formControlName="visitReason" placeholder="Käynnin syyt..." />
     </div>
 
-    <label for="visitType">Tapahtuman tyyppi:</label>
-    <select id="visitType" formControlName="visitType" required>
-      <option value="" disabled selected>Select visit type</option>
-      <option *ngFor="let type of visitTypes" [value]="type">{{ type }}</option>
-    </select>
-    <div class="error" *ngIf="visitForm.get('visitType')?.invalid && visitForm.get('visitType')?.touched">
-      Visit type is required
+    <div class="form-row status-row">
+      <label>Tila:</label>
+      <div class="status-options">
+        <label><input type="radio" formControlName="status" value="Luonnos" /> Luonnos</label>
+        <label><input type="radio" formControlName="status" value="Valmis" /> Valmis</label>
+        <label><input type="radio" formControlName="status" value="Hyväksytty" /> Hyväksytty</label>
+      </div>
     </div>
 
-    <label for="notes">Käynnin syyt:</label>
-    <textarea id="notes" formControlName="notes" placeholder="Käynnin syyt..." rows="4"></textarea>
-
-    <div class="form-buttons">
-      <button type="submit" [disabled]="!visitForm.valid" class="btn-primary">Luo tapahtuma</button>
-      <button type="button" class="btn-secondary">Sulje</button>
+    <div class="form-row two-columns">
+      <div>
+        <label for="doctor">Lääkäri:</label>
+      </div>
+      <div>
+        <input id="doctor" type="text" formControlName="doctor" readonly />
+      </div>
+    </div>
+    
+    <div class="form-row two-columns">
+      <div>
+        <label for="appointmentDateTime">Vastaanottoaika ja -päivämäärä:</label>
+      </div>
+      <div>
+        <input id="appointmentDateTime" type="datetime-local" formControlName="appointmentDateTime" />
+      </div>
     </div>
 
+    <div class="form-row">
+      <label for="additionalNotes">Lisähuomiot:</label>
+      <textarea id="additionalNotes" rows="3" formControlName="additionalNotes"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-primary" type="submit" [disabled]="!visitForm.valid">Luo tapahtuma</button>
+      <button class="btn-secondary" type="button" (click)="closeForm()">Sulje</button>
+    </div>
   </form>
 </div>

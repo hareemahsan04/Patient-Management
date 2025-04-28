@@ -51,14 +51,14 @@ export class DashboardComponent {
     { time: '02:15 PM', name: 'Laura Leppänen – 151139-258D', type: 'Etävastaanotto' },
   ];
 
-  shortcuts = [
-    { name: 'Sairaalalähete', icon: 'assets/icons/hospital-referral.png' },
-    { name: 'Laboratoriotilaus', icon: 'assets/icons/lab-order.png' },
-    { name: 'Todistukset', icon: 'assets/icons/certificates.png' },
-    { name: 'Resepti', icon: 'assets/icons/prescription.png' },
-    { name: 'Kuvantaminen', icon: 'assets/icons/imaging.png' },
-    { name: 'Lääkelista', icon: 'assets/icons/medication-list.png' },
-  ];
+shortcuts = [
+  { name: 'Sairaalalähete', icon: 'local_hospital' },
+  { name: 'Laboratoriotilaus', icon: 'science' },
+  { name: 'Todistukset', icon: 'description' },
+  { name: 'Resepti', icon: 'receipt' },
+  { name: 'Kuvantaminen', icon: 'image' },
+  { name: 'Lääkelista', icon: 'medication' },
+];
 
   recentPatients = [
     { name: 'Olavi Virtanen', id: '240545-123Y' },
